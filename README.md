@@ -44,4 +44,4 @@ The following commands will then be available from the repository root:
 
 ## License
 
-`chartjs-adapter-moment` is available under the [MIT license](LICENSE.md).
+`chartjs-adapter-dayjs` is available under the [MIT license](LICENSE.md).
