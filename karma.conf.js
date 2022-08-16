@@ -4,22 +4,22 @@ const builds = require('./rollup.config');
 const yargs = require('yargs');
 const env = process.env.NODE_ENV;
 
-module.exports = function(karma) {
+module.exports = function (karma) {
   const args = yargs
-    .option('verbose', {default: false})
+    .option('verbose', { default: false })
     .argv;
 
   // Use the same rollup config as our dist files: when debugging (npm run dev),
   // we will prefer the unminified build which is easier to browse and works
   // better with source mapping. In other cases, pick the minified build to
   // make sure that the minification process (terser) doesn't break anything.
-  const regex = karma.autoWatch ? /chartjs-adapter-moment\.js$/ : /chartjs-adapter-moment\.min\.js$/;
+  const regex = karma.autoWatch ? /chartjs-adapter-dayjs\.js$/ : /chartjs-adapter-dayjs\.min\.js$/;
   const build = builds.filter(v => v.output.file && v.output.file.match(regex))[0];
 
   if (env === 'test') {
     build.plugins = [
       resolve(),
-      istanbul({exclude: ['node_modules/**/*.js', 'package.json']})
+      istanbul({ exclude: ['node_modules/**/*.js', 'package.json'] })
     ];
   }
 
@@ -54,14 +54,20 @@ module.exports = function(karma) {
     },
 
     files: [
-      {pattern: 'node_modules/moment/moment.js',},
-      {pattern: 'node_modules/chart.js/dist/chart.js'},
-      {pattern: 'src/index.js', watched: false},
-      {pattern: 'test/index.js'},
-      {pattern: 'test/specs/**/**.js'}
+      { pattern: 'node_modules/dayjs/plugin/isoWeek.js' },
+      { pattern: 'node_modules/dayjs/plugin/quarterOfYear.js' },
+      { pattern: 'node_modules/dayjs/plugin/advancedFormat.js' },
+      { pattern: 'node_modules/dayjs/day.min.js', },
+      { pattern: 'node_modules/chart.js/dist/chart.js' },
+      { pattern: 'src/index.js', watched: false },
+      { pattern: 'test/index.js' },
+      { pattern: 'test/specs/**/**.js' }
     ],
 
     preprocessors: {
+      'node_modules/dayjs/plugin/isoWeek.js': ["plugin"],
+      'node_modules/dayjs/plugin/quarterOfYear.js': ["plugin"],
+      'node_modules/dayjs/plugin/advancedFormat.js': ["plugin"],
       'src/index.js': ['sources'],
       'test/index.js': ['rollup'],
       'test/specs/**/*.js': ['rollup'],
@@ -75,6 +81,21 @@ module.exports = function(karma) {
         name: 'test',
         format: 'umd',
         sourcemap: karma.autoWatch ? 'inline' : false
+      }
+    },
+
+    customPreprocessors: {
+      // plugins: [
+      //   resolve()
+      // ],
+      // output: {
+      //   name: 'dayjs_plugin_[name]',
+      //   format: 'umd',
+      //   sourcemap: karma.autoWatch ? 'inline' : false
+      // }
+      sources:{
+        base:'plugin',
+        options:build
       }
     },
 
@@ -96,8 +117,8 @@ module.exports = function(karma) {
     karma.coverageReporter = {
       dir: 'coverage/',
       reporters: [
-        {type: 'html', subdir: 'html'},
-        {type: 'lcovonly', subdir: (browser) => browser.toLowerCase().split(/[ /-]/)[0]}
+        { type: 'html', subdir: 'html' },
+        { type: 'lcovonly', subdir: (browser) => browser.toLowerCase().split(/[ /-]/)[0] }
       ]
     };
   }

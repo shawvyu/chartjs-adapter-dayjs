@@ -12,11 +12,11 @@ const banner = `/*!
 const input = 'src/index.js';
 const external = [
   'chart.js',
-  'moment'
+  'dayjs'
 ];
 const globals = {
   'chart.js': 'Chart',
-  moment: 'moment'
+  dayjs: 'dayjs'
 };
 
 module.exports = [

@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 const {_adapters} = Chart;
 
-describe('Dayjs Adapter', function() {
+// describe('Dayjs Adapter', function() {
   // it("should format correctly using format presets", function () {
   //   var adapter = new _adapters._date();
   //   var formats = adapter.formats();
@@ -61,4 +61,4 @@ describe('Dayjs Adapter', function() {
   //     expect(startOf.day).not.toBeGreaterThan(dt.day);
   //   }
   // });
-});
+// });
