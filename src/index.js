@@ -1,6 +1,6 @@
 // "use strict";
 
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import * as isoWeek from "dayjs/plugin/isoWeek";
 import * as quarterOfYear from 'dayjs/plugin/quarterOfYear'
 import * as advancedFormat from "dayjs/plugin/advancedFormat"

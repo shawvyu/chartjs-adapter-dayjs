@@ -54,9 +54,9 @@ module.exports = function (karma) {
     },
 
     files: [
-      { pattern: 'node_modules/dayjs/plugin/isoWeek.js' },
-      { pattern: 'node_modules/dayjs/plugin/quarterOfYear.js' },
-      { pattern: 'node_modules/dayjs/plugin/advancedFormat.js' },
+      { pattern: 'dist/dayjs_plugin_isoWeek.js' },
+      { pattern: 'dist/dayjs_plugin_quarterOfYear.js' },
+      { pattern: 'dist/dayjs_plugin_advancedFormat.js' },
       { pattern: 'node_modules/dayjs/day.min.js', },
       { pattern: 'node_modules/chart.js/dist/chart.js' },
       { pattern: 'src/index.js', watched: false },
@@ -65,9 +65,9 @@ module.exports = function (karma) {
     ],
 
     preprocessors: {
-      'node_modules/dayjs/plugin/isoWeek.js': ["plugin"],
-      'node_modules/dayjs/plugin/quarterOfYear.js': ["plugin"],
-      'node_modules/dayjs/plugin/advancedFormat.js': ["plugin"],
+      // 'node_modules/dayjs/plugin/isoWeek.js': ["plugin"],
+      // 'node_modules/dayjs/plugin/quarterOfYear.js': ["plugin"],
+      // 'node_modules/dayjs/plugin/advancedFormat.js': ["plugin"],
       'src/index.js': ['sources'],
       'test/index.js': ['rollup'],
       'test/specs/**/*.js': ['rollup'],
@@ -84,20 +84,20 @@ module.exports = function (karma) {
       }
     },
 
-    customPreprocessors: {
-      // plugins: [
-      //   resolve()
-      // ],
-      // output: {
-      //   name: 'dayjs_plugin_[name]',
-      //   format: 'umd',
-      //   sourcemap: karma.autoWatch ? 'inline' : false
-      // }
-      sources:{
-        base:'plugin',
-        options:build
-      }
-    },
+    // customPreprocessors: {
+    //   // plugins: [
+    //   //   resolve()
+    //   // ],
+    //   // output: {
+    //   //   name: 'dayjs_plugin_[name]',
+    //   //   format: 'umd',
+    //   //   sourcemap: karma.autoWatch ? 'inline' : false
+    //   // }
+    //   sources:{
+    //     base:'plugin',
+    //     options:build
+    //   }
+    // },
 
     customPreprocessors: {
       sources: {
