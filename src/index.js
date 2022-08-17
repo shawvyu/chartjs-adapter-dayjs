@@ -1,20 +1,16 @@
-// "use strict";
+"use strict";
 
 import dayjs from "dayjs";
-import * as isoWeek from "dayjs/plugin/isoWeek";
-import * as quarterOfYear from 'dayjs/plugin/quarterOfYear'
-import * as advancedFormat from "dayjs/plugin/advancedFormat"
+import isoWeek from "dayjs/plugin/isoWeek";
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+import advancedFormat from "dayjs/plugin/advancedFormat"
+import localizedFormat from "dayjs/plugin/localizedFormat"
 import { _adapters } from "chart.js";
-
-// const dayjs = require("dayjs")
-// const isoWeek = require("dayjs/plugin/isoWeek")
-// const quarterOfYear = require("dayjs/plugin/quarterOfYear")
-// const advancedFormat = require("dayjs/plugin/advancedFormat")
-// const { _adapters } = require("chart.js")
 
 dayjs.extend(isoWeek);
 dayjs.extend(quarterOfYear);
-dayjs.extend(advancedFormat)
+dayjs.extend(advancedFormat);
+dayjs.extend(localizedFormat);
 
 
 const FORMATS = {
@@ -61,7 +57,7 @@ _adapters._date.override(
       },
 
       startOf: function (time, unit, weekday) {
-        console.log(time, unit, weekday)
+        console.log('4444444:',time, unit, weekday)
         time = dayjs(time);
         if (unit === "isoWeek") {
           weekday = Math.trunc(Math.min(Math.max(0, weekday), 6));

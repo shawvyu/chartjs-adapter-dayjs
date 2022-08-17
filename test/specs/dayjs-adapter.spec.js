@@ -1,18 +1,19 @@
 
 // eslint-disable-next-line no-unused-vars
-const {_adapters} = Chart;
 
-// describe('Dayjs Adapter', function() {
-  // it("should format correctly using format presets", function () {
-  //   var adapter = new _adapters._date();
-  //   var formats = adapter.formats();
+const { _adapters } = Chart;
 
-  //   // expect(adapter.format(1559056227321, formats.year)).toEqual("2019");
-  //   // expect(adapter.format(1559056227321, formats.quarter)).toEqual("Q2 - 2019");
-  //   // expect(adapter.format(1559056227321, formats.month)).toEqual("May 2019");
-  //   // expect(adapter.format(1559056227321, formats.week)).toEqual("May 28, 2019");
-  //   // expect(adapter.format(1559056227321, formats.day)).toEqual("May 28");
-  // });
+describe('Dayjs Adapter', function () {
+  it("should format correctly using format presets", function () {
+    var adapter = new _adapters._date();
+    var formats = adapter.formats()
+
+    expect(adapter.format(1559056227321, formats.year)).toEqual("2019");
+    expect(adapter.format(1559056227321, formats.quarter)).toEqual("Q2 - 2019");
+    expect(adapter.format(1559056227321, formats.month)).toEqual("May 2019");
+    expect(adapter.format(1559056227321, formats.week)).toEqual("May 28, 2019");
+    expect(adapter.format(1559056227321, formats.day)).toEqual("May 28");
+  });
 
   // it("should startOf correctly using isoWeek preset", function () {
   //   const adapter = new _adapters._date();
@@ -28,6 +29,7 @@ const {_adapters} = Chart;
   //         "isoWeek",
   //         dayOfWeekNames.indexOf(dayOfWeek)
   //       );
+  //       console.log('startof',startOf)
   //       expect(adapter.format(startOf, "ddd")).toEqual(dayOfWeek);
   //       expect(startOf.day).not.toBeGreaterThan(dt.day);
   //     }
@@ -61,4 +63,4 @@ const {_adapters} = Chart;
   //     expect(startOf.day).not.toBeGreaterThan(dt.day);
   //   }
   // });
-// });
+});

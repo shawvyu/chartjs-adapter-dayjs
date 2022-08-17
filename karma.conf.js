@@ -23,10 +23,20 @@ module.exports = function (karma) {
     ];
   }
 
+  const globals = {
+    'chart.js': 'Chart',
+    'dayjs': 'dayjs',
+    'dayjs/plugin/isoWeek': 'dayjs_plugin_isoWeek',
+    'dayjs/plugin/quarterOfYear': 'dayjs_plugin_quarterOfYear',
+    'dayjs/plugin/advancedFormat': 'dayjs_plugin_advancedFormat',
+    'dayjs/plugin/localizedFormat': 'dayjs_plugin_localizedFormat',
+    'dayjs/plugin/objectSupport': 'dayjs_plugin_objectSupport',
+  };
+
   karma.set({
     frameworks: ['jasmine'],
     reporters: ['progress', 'kjhtml'],
-    browsers: (args.browsers || 'chrome,firefox').split(','),
+    browsers: (args.browsers || 'chrome').split(','),
     logLevel: karma.LOG_INFO,
 
     client: {
@@ -34,6 +44,7 @@ module.exports = function (karma) {
         failFast: !!karma.autoWatch
       }
     },
+
 
     // Explicitly disable hardware acceleration to make image
     // diff more stable when ran on Travis and dev machine.
@@ -53,22 +64,22 @@ module.exports = function (karma) {
       }
     },
 
+
     files: [
-      { pattern: 'dist/dayjs_plugin_isoWeek.js' },
-      { pattern: 'dist/dayjs_plugin_quarterOfYear.js' },
-      { pattern: 'dist/dayjs_plugin_advancedFormat.js' },
-      { pattern: 'node_modules/dayjs/day.min.js', },
+      { pattern: 'node_modules/dayjs/dayjs.min.js', },
       { pattern: 'node_modules/chart.js/dist/chart.js' },
-      { pattern: 'src/index.js', watched: false },
+      { pattern: 'node_modules/dayjs/plugin/isoWeek.js' },
+      { pattern: 'node_modules/dayjs/plugin/quarterOfYear.js' },
+      { pattern: 'node_modules/dayjs/plugin/advancedFormat.js' },
+      { pattern: 'node_modules/dayjs/plugin/localizedFormat.js' },
+      { pattern: 'node_modules/dayjs/plugin/objectSupport.js' },
+      { pattern: 'dist/chartjs-adapter-dayjs.js' },
       { pattern: 'test/index.js' },
       { pattern: 'test/specs/**/**.js' }
     ],
 
     preprocessors: {
-      // 'node_modules/dayjs/plugin/isoWeek.js': ["plugin"],
-      // 'node_modules/dayjs/plugin/quarterOfYear.js': ["plugin"],
-      // 'node_modules/dayjs/plugin/advancedFormat.js': ["plugin"],
-      'src/index.js': ['sources'],
+      // 'src/index.js': ['sources'],
       'test/index.js': ['rollup'],
       'test/specs/**/*.js': ['rollup'],
     },
@@ -80,31 +91,19 @@ module.exports = function (karma) {
       output: {
         name: 'test',
         format: 'umd',
+        globals,
         sourcemap: karma.autoWatch ? 'inline' : false
       }
     },
 
     // customPreprocessors: {
-    //   // plugins: [
-    //   //   resolve()
-    //   // ],
-    //   // output: {
-    //   //   name: 'dayjs_plugin_[name]',
-    //   //   format: 'umd',
-    //   //   sourcemap: karma.autoWatch ? 'inline' : false
-    //   // }
-    //   sources:{
-    //     base:'plugin',
-    //     options:build
+    //   sources: {
+    //     base: 'rollup',
+    //     options: build
     //   }
     // },
 
-    customPreprocessors: {
-      sources: {
-        base: 'rollup',
-        options: build
-      }
-    },
+
 
     // These settings deal with browser disconnects. We had seen test flakiness from Firefox
     // [Firefox 56.0.0 (Linux 0.0.0)]: Disconnected (1 times), because no message in 10000 ms.
